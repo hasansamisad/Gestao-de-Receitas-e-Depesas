@@ -1,0 +1,113 @@
+body {
+    background: #f8f9fa;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.navbar {
+    border-bottom: 3px solid #007bff;
+    padding: 10px 0;
+}
+
+.navbar-brand {
+    font-size: 1.6rem;
+    letter-spacing: 0.5px;
+}
+
+.nav-link {
+    font-size: 1.1rem;
+    margin-right: 10px;
+    transition: 0.2s;
+}
+
+.nav-link:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+.content-area {
+    min-height: 75vh;
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+}
+
+.page-title,
+h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #343a40;
+    margin-bottom: 25px;
+}
+
+.table-card {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.table thead th {
+    background: #007bff;
+    color: #fff;
+    font-size: 16px;
+    text-align: left;
+}
+
+.table tbody tr:hover {
+    background-color: #e9ecef;
+    transition: 0.2s;
+}
+
+.btn-edit {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 6px;
+    padding: 6px 14px;
+}
+
+.btn-edit:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: #fff;
+    border-radius: 6px;
+    padding: 6px 14px;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+    color: #fff;
+}
+
+.home-title {
+    margin-top: 40px;
+    font-weight: bold;
+}
+
+.home-subtitle {
+    color: #555;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.3rem;
+    }
+
+    .nav-link {
+        font-size: 1rem;
+        margin-right: 0;
+    }
+
+    .content-area {
+        padding: 20px;
+    }
+
+    h1, .page-title {
+        font-size: 24px;
+        text-align: center;
+    }
+}
