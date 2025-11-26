@@ -1,25 +1,29 @@
 <?php
 require_once 'config.php';
 
-// Consulta para calcular o saldo total
-$sql = "SELECT 
-            SUM(CASE WHEN tipo = 'RECEITA' THEN quantidade ELSE 0 END) AS total_receitas,
-            SUM(CASE WHEN tipo = 'DESPESA' THEN quantidade ELSE 0 END) AS total_despesas
-        FROM 
-            movimentacoes";
+$sql_saldo = "SELECT saldo_total FROM saldo WHERE id_saldo = 1";
+$res_saldo = $conn->query($sql_saldo);
+$saldo_row = $res_saldo->fetch_object();
 
-$res = $conn->query($sql);
-$row = $res->fetch_object();
+$saldo_total = $saldo_row->saldo_total ?? 0.00;
 
-$total_receitas = $row->total_receitas ?? 0;
-$total_despesas = $row->total_despesas ?? 0;
-$saldo_total = $total_receitas - $total_despesas;
+if ($res_saldo) $res_saldo->free();
+
+$total_receitas = 0;
+$total_despesas = 0;
 ?>
 
-<h1 class="page-title">Consultar Saldo</h1>
+<h1 class="page-title">Consultar Saldo Atual</h1>
 
 <div class="card shadow p-4">
-    <h2>Saldo Total: R$ <?= number_format($saldo_total, 2, ',', '.') ?></h2>
-    <p>Total de Receitas: R$ <?= number_format($total_receitas, 2, ',', '.') ?></p>
-    <p>Total de Despesas: R$ <?= number_format($total_despesas, 2, ',', '.') ?></p>
+    <?php $saldo_classe = ($saldo_total >= 0) ? 'text-success' : 'text-danger'; ?>
+    
+    <h2 class="mb-3">
+        Saldo Total: 
+        <span class="fw-bold <?= $saldo_classe ?>">R$ <?= number_format($saldo_total, 2, ',', '.') ?></span>
+    </h2>
+    <hr>
+    
+    <p class="text-muted">Total de Receitas (Geral ou Período): R$ <?= number_format($total_receitas, 2, ',', '.') ?></p>
+    <p class="text-muted">Total de Despesas (Geral ou Período): R$ <?= number_format($total_despesas, 2, ',', '.') ?></p>
 </div>

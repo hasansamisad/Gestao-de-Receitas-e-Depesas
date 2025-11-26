@@ -16,10 +16,12 @@ $res_categorias = $conn->query($sql_categorias);
             <select name="id_categoria" class="form-select" required>
                 <option value="">Selecione a Categoria</option>
                 <?php
-                if ($res_categorias->num_rows > 0) {
+                if ($res_categorias && $res_categorias->num_rows > 0) { 
                     while($row_cat = $res_categorias->fetch_object()) {
-                        print "<option value='{$row_cat->id_categoria}'>{$row_cat->nome_categoria}</option>";
+                        $nome_seguro = htmlentities($row_cat->nome_categoria, ENT_QUOTES, 'UTF-8');
+                        print "<option value='{$row_cat->id_categoria}'>{$nome_seguro}</option>";
                     }
+                    $res_categorias->free();
                 } else {
                     print "<option value='' disabled>Nenhuma categoria cadastrada.</option>";
                 }
@@ -28,8 +30,8 @@ $res_categorias = $conn->query($sql_categorias);
         </div>
 
         <div class="mb-3">
-            <label class="form-label fw-semibold">Descrição</label>
-            <input type="text" name="descricao" class="form-control" required>
+            <label class="form-label fw-semibold">Observações (ou Descrição)</label>
+            <input type="text" name="observacoes" class="form-control">
         </div>
 
         <div class="mb-3">
